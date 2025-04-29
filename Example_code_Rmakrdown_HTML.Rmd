@@ -1,0 +1,50 @@
+---
+title: "Template for Rmarkdown to html"
+output:
+  html_document:
+    toc: TRUE
+    toc_float:
+      collapsed: TRUE
+date: "2023-09-21"
+---
+
+```{r}
+library(table1)
+
+library(knitr)
+library(kableExtra)
+```
+
+# Note for output
+- `toc: TRUE`
+  - Make a table of content
+- `toc_float:`
+  - Make the table of content floating
+- `collapsed: TRUE`
+  - Collapse the table of content floating, only expand when you are in the section.
+  
+# 1. Default setting for table header
+```{css, echo=FALSE}
+caption {
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+}
+```
+
+# 2. Example code for table1 object
+```{r}
+table1(~ AGE + PTGENDER + PTEDUCAT + DX_bl + APOE_geno|AT_subgroup, adni) %>%
+  kable() %>%
+  kable_styling(c("striped", "bordered", "condensed", "responsive"), full_width = FALSE, fixed_thead = TRUE)
+```
+
+# 3. Example code for a data frame
+```{r}
+result %>% 
+  kable() %>%
+  kable_styling(c("striped", "bordered", "condensed", "responsive"), full_width = FALSE, fixed_thead = TRUE) %>%
+  # make the table scrollable with fixed-height
+  scroll_box(width = "100%", height = "300px")
+```
+
